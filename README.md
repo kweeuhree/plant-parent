@@ -1,3 +1,7 @@
+<hr>
+<h1 align="center">- In Development -</h1>
+<hr>
+
 Plant Parent application.
 <ul>Main goals:</ul>
 <li>Use Next.js</li>
