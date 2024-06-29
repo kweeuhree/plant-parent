@@ -33,7 +33,6 @@ const UserSchema = new mongoose.Schema<Users>({
   avatar_url: {
     /* Url to avatar */
 
-    required: [false, "Please provide an image url for this User."],
     type: String,
   }
 });
