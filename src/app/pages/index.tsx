@@ -3,7 +3,7 @@ import User, { Users } from "../models/User";
 import { GetServerSideProps } from "next";
 
 type Props = {
-    pets: Users[];
+   users: Users[];
   };
   
   const Index = ({ users }: Props) => {
@@ -12,7 +12,7 @@ type Props = {
         {users.map((user) => (
           <div key={user._id}>
             <div className="card">
-              <img src={user.image_url} />
+              <img src={user.avatar_url} />
               <h5 className="pet-name">{user.name}</h5>
               <div className="main-content">
                 <p className="pet-name">{user.name}</p>
