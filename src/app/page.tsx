@@ -1,5 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+// for seamless transition between pages, instead of anchor use Link to navigate   
+import Link from 'next/link';
 
 export default function Home() {
   return (
