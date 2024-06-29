@@ -10,7 +10,7 @@ type Props = {
     return (
       <>
         {users.map((user) => (
-          <div key={user._id}>
+          <div key={user._id} as string>
             <div className="card">
               <img src={user.avatar_url} />
               <h5 className="pet-name">{user.name}</h5>
