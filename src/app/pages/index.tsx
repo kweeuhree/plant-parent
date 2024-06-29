@@ -1,5 +1,5 @@
-import connectToDb from '../app/lib/connectToDb';
-import User, { Users } from "../../src/app/models/User";
+import connectToDb from '../lib/connectToDb';
+import User, { Users } from "../models/User";
 import { GetServerSideProps } from "next";
 
 type Props = {
