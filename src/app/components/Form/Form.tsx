@@ -81,7 +81,7 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
         throw new Error(res.status.toString());
       }
 
-      router.push("/");
+      // router.push("/");
     } catch (error) {
       setMessage("Failed to add User");
     }
