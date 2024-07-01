@@ -1,4 +1,3 @@
-"use-client"
 import type { Metadata } from "next";
 // import  font and styles
 import { Inter } from "next/font/google";
