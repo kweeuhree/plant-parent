@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { mutate } from "swr";
 
 interface FormData {
@@ -24,7 +24,7 @@ type Props = {
 };
 
 const Form = ({ formId, userForm, forNewUser = true }: Props) => {
-  const router = useRouter();
+  // const router = useRouter();
   const contentType = "application/json";
   const [errors, setErrors] = useState<Error>({});
   const [message, setMessage] = useState("");
@@ -37,32 +37,32 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
   });
 
   /* The PUT method edits an existing entry in the mongodb database. */
-  const putData = async (form: FormData) => {
-    const { id } = router.query;
+  // const putData = async (form: FormData) => {
+  //   const { id } = router.query;
 
-    try {
-      const res = await fetch(`/api/users/${id}`, {
-        method: "PUT",
-        headers: {
-          Accept: contentType,
-          "Content-Type": contentType,
-        },
-        body: JSON.stringify(form),
-      });
+  //   try {
+  //     const res = await fetch(`/api/users/${id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         Accept: contentType,
+  //         "Content-Type": contentType,
+  //       },
+  //       body: JSON.stringify(form),
+  //     });
 
-      // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status.toString());
-      }
+  //     // Throw error with status code in case Fetch API req failed
+  //     if (!res.ok) {
+  //       throw new Error(res.status.toString());
+  //     }
 
-      const { data } = await res.json();
+  //     const { data } = await res.json();
 
-      mutate(`/api/users/${id}`, data, false); // Update the local data without a revalidation
-      router.push("/");
-    } catch (error) {
-      setMessage("Failed to update User");
-    }
-  };
+  //     mutate(`/api/users/${id}`, data, false); // Update the local data without a revalidation
+  //     router.push("/");
+  //   } catch (error) {
+  //     setMessage("Failed to update User");
+  //   }
+  // };
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form: FormData) => {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 // for seamless transition between pages, instead of anchor use Link to navigate   
 import Link from 'next/link';
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import Form from "../app/components/Form/Form";
 import { PiPlantDuotone } from "react-icons/pi";
 
@@ -16,6 +16,9 @@ const userForm = {
 }
 
 export default function Home() {
+  // const router = useRouter();
+  // const { userId } = router.query;
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
