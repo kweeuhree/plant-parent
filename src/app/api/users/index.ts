@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import connectToDb from '../../../lib/connectToDb';
-import User from "../../../models/User";
+import connectToDb from '../../lib/connectToDb';
+import User from "../../models/User";
 
 export default async function handler(
   req: NextApiRequest,
