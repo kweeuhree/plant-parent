@@ -117,7 +117,7 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
     const errs = formValidate();
 
     if (Object.keys(errs).length === 0) {
-      forNewUser ? postData(form) : putData(form);
+      forNewUser && postData(form);
     } else {
       setErrors( errs );
     }
