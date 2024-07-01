@@ -1,53 +1,67 @@
-import { connect } from "http2";
+//require env
+require('dotenv').config();
 
-import mongoose from "mongoose";
-import dotenv from "dotenv";
+//require mongoose
+const mongoose = require('mongoose');
+//require url
+const DB_URL = process.env.DB_URL;
 
-dotenv.config();
-
-declare global {
-  var mongoose: any; // This must be a `var` and not a `let / const`
+//connect
+const connectToDb = async () => {
+    await mongoose.connect(DB_URL);
+    console.log('konnekted to kluster');
 }
 
-const MONGODB_URI = process.env.MONGODB_URI as string;
+// import { connect } from "http2";
 
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
-}
+// import mongoose from "mongoose";
+// import dotenv from "dotenv";
 
-let cached = global.mongoose;
+// dotenv.config();
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+// declare global {
+//   var mongoose: any; // This must be a `var` and not a `let / const`
+// }
 
-async function connectToDb() {
-  if (cached.conn) {
-    return cached.conn;
-  }
+// const MONGODB_URI = process.env.MONGODB_URI as string;
 
-  if (!cached.promise) {
-    const opts = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    };
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log("MongoDB connected successfully");
-      return mongoose;
-    });
-  }
+// if (!MONGODB_URI) {
+//   throw new Error(
+//     "Please define the MONGODB_URI environment variable inside .env.local"
+//   );
+// }
 
-  try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
+// let cached = global.mongoose;
 
-  return cached.conn;
-}
+// if (!cached) {
+//   cached = global.mongoose = { conn: null, promise: null };
+// }
+
+// async function connectToDb() {
+//   if (cached.conn) {
+//     return cached.conn;
+//   }
+
+//   if (!cached.promise) {
+//     const opts = {
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true,
+//     };
+//     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+//       console.log("MongoDB connected successfully");
+//       return mongoose;
+//     });
+//   }
+
+//   try {
+//     cached.conn = await cached.promise;
+//   } catch (e) {
+//     cached.promise = null;
+//     throw e;
+//   }
+
+//   return cached.conn;
+// }
 
 export default connectToDb;
 
