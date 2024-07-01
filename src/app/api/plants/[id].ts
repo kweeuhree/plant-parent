@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import connectToDb from '../../../lib/connectToDb';
-import User from "../../../models/User";
+import connectToDb from '../../lib/connectToDb';
+import Plant from "../../models/Plant";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,11 +16,11 @@ export default async function handler(
   switch (method) {
     case "GET" /* Get a model by its ID */:
       try {
-        const user = await User.findById(id);
-        if (!user) {
+        const plant = await Plant.findById(id);
+        if (!plant) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: user });
+        res.status(200).json({ success: true, data: plant });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -28,14 +28,14 @@ export default async function handler(
 
     case "PUT" /* Edit a model by its ID */:
       try {
-        const user = await User.findByIdAndUpdate(id, req.body, {
+        const plant = await Plant.findByIdAndUpdate(id, req.body, {
           new: true,
           runValidators: true,
         });
-        if (!user) {
+        if (!plant) {
           return res.status(400).json({ success: false });
         }
-        res.status(200).json({ success: true, data: user });
+        res.status(200).json({ success: true, data: plant });
       } catch (error) {
         res.status(400).json({ success: false });
       }
@@ -43,8 +43,8 @@ export default async function handler(
 
     case "DELETE" /* Delete a model by its ID */:
       try {
-        const deletedUser = await User.deleteOne({ _id: id });
-        if (!deletedUser) {
+        const deletedPlant = await Plant.deleteOne({ _id: id });
+        if (!deletedPlant) {
           return res.status(400).json({ success: false });
         }
         res.status(200).json({ success: true, data: {} });
