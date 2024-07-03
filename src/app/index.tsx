@@ -1,4 +1,4 @@
-import connectToDb from './(lib)/connectToDb';
+import {connectToDb} from './(lib)/connectToDb';
 import User, { Users } from "./(models)/User";
 import { GetServerSideProps } from "next";
 
