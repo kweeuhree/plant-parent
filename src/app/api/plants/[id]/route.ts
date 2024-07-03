@@ -10,12 +10,12 @@ export async function GET(
   const id = params.id 
   console.log(id);
 
-  const user = await Plant.findById(id);
-  if (!user) {
+  const plant = await Plant.findById(id);
+  if (!plant) {
     return NextResponse.json({ success: false, message: 'User not found'}, { status: 400});
   }
 
-  return NextResponse.json({ success: true, data: user}, { status: 200});
+  return NextResponse.json({ success: true, data: plant}, { status: 200});
 }
 
 // Handle PUT user requests
@@ -29,15 +29,15 @@ export async function PUT(
   console.log(reqBody, 'req body');
 
   try {
-    const user = await Plant.findByIdAndUpdate(id, reqBody, {
+    const plant = await Plant.findByIdAndUpdate(id, reqBody, {
       new: true
       // runValidators: true,
     });
-    if (!User) {
-      return NextResponse.json({ success: false, message: 'User with this id isnt found'}, { status: 400});
+    if (!plant) {
+      return NextResponse.json({ success: false, message: 'Plant with this id not found'}, { status: 400});
       }
 
-    return NextResponse.json({ success: true, data: user}, { status: 200});
+    return NextResponse.json({ success: true, data: plant}, { status: 200});
 
     } catch (error) {
     return NextResponse.json({ success: false, message: error}, { status: 400});
@@ -49,7 +49,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id // 'a', 'b', or 'c'
+  const id = params.id 
   console.log(id);
 
   try {
