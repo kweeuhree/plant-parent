@@ -1,15 +1,33 @@
-//require env
-require('dotenv').config();
+import mongoose from "mongoose";
 
-//require mongoose
-const mongoose = require('mongoose');
-//require url
-const DB_URL = process.env.DB_URL;
+declare global {
+  var mongoose: any; // This must be a `var` and not a `let / const`
+}
 
-//connect
-const connectToDb = async () => {
-    await mongoose.connect(DB_URL);
-    console.log('konnekted to kluster');
+global.mongoose = {
+    conn: null,
+    promise: null,
+}
+
+export async function connectToDb() {
+    if(global.mongoose && global.mongoose.conn) {
+        console.log('connected from previous');
+        return global.mongoose.conn;
+    } else {
+        const conString = process.env.MONGODB_URI;
+
+        const promise = mongoose.connect(conString as string, {
+            autoIndex: true,
+        });
+
+        global.mongoose = {
+            conn: await promise,
+            promise,
+        };
+        console.log('Newly connected');
+
+        return await promise;
+    }
 }
 
 // import { connect } from "http2";
@@ -63,7 +81,7 @@ const connectToDb = async () => {
 //   return cached.conn;
 // }
 
-export default connectToDb;
+// export default connectToDb;
 
 
 
