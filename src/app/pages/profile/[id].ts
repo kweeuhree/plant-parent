@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { connectToDb } from '../lib/connectToDb';
-import User from '../models/User';
+import { connectToDb } from '../(lib)/connectToDb';
+import User from '../(models)/User';
 
 // Ensure the database connection is established
 connectToDb();

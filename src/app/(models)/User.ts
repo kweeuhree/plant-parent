@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema<Users>({
 
     type: String,
     required: [true, "Please provide a password for this User."],
-    maxlength: [20, "Password cannot be more than 20 characters"],
+    maxlength: [40, "Password cannot be more than 40 characters"],
   },
   avatar_url: {
     /* Url to avatar */
