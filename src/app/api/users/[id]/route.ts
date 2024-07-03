@@ -23,22 +23,24 @@ export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const id = params.id 
-  console.log(id);
+  const id = params.id; 
+
+  const reqBody = await request.json();
+  console.log(reqBody, 'req body');
 
   try {
-    const user = await User.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
+    const user = await User.findByIdAndUpdate(id, reqBody, {
+      new: true
+      // runValidators: true,
     });
     if (!User) {
-      return NextResponse.json({ success: false}, { status: 400});
+      return NextResponse.json({ success: false, message: 'User with this id isnt found'}, { status: 400});
       }
 
     return NextResponse.json({ success: true, data: user}, { status: 200});
 
     } catch (error) {
-    return NextResponse.json({ success: false}, { status: 400});
+    return NextResponse.json({ success: false, message: error}, { status: 400});
   }
 }
 
