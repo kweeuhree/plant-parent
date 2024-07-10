@@ -13,9 +13,9 @@ type Props = {
           <div key={index}>
             <div className="card">
               <img src={user.avatar_url} />
-              <h5 className="pet-name">{user.name}</h5>
+              <h5 className="user-name">{user.name}</h5>
               <div className="main-content">
-                <p className="pet-name">{user.name}</p>
+                <p className="user-name">{user.name}</p>
               </div>
             </div>
           </div>

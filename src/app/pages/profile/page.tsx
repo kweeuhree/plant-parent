@@ -1,4 +1,4 @@
-const profilePage = ({ userId }: { userId: string }) => {
+const profilePage = () => {
   return (
     <div>profilePage</div>
   )
