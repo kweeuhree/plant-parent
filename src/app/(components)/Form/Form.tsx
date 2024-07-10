@@ -38,6 +38,7 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form: FormData) => {
+    console.log('attempting post request');
     try {
       const response = await fetch("/api/users", {
         method: "POST",
