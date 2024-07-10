@@ -3,6 +3,8 @@
 import { useState } from "react";
 // import { useRouter } from "next/router";
 import { mutate } from "swr";
+//import styles
+import styles from './FormStyle.module.css';
 
 interface FormData {
     name: string;
@@ -125,7 +127,7 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
 
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit}>
+      <form id={formId} onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor="name">Name</label>
         <input
           type="text"
