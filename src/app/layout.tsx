@@ -27,7 +27,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SideBar  />
         {children}
         <footer>&copy; {name}, {year}</footer>
         </body>
