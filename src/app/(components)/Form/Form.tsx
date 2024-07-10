@@ -9,8 +9,8 @@ import styles from './FormStyle.module.css';
 interface FormData {
     name: string;
     email: string;
-    password: string;
-    avatar_url: string;
+    password: string
+    // avatar_url: string;
 }
 
 interface Error {
@@ -26,7 +26,6 @@ type Props = {
 };
 
 const Form = ({ formId, userForm, forNewUser = true }: Props) => {
-  // const router = useRouter();
   const contentType = "application/json";
   const [errors, setErrors] = useState<Error>({});
   const [message, setMessage] = useState("");
@@ -34,42 +33,13 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
   const [form, setForm] = useState<FormData>({
     name: userForm.name,
     email: userForm.email,
-    password: userForm.password,
-    avatar_url: userForm.avatar_url,
+    password: userForm.password
   });
-
-  /* The PUT method edits an existing entry in the mongodb database. */
-  // const putData = async (form: FormData) => {
-  //   const { id } = router.query;
-
-  //   try {
-  //     const res = await fetch(`/api/users/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         Accept: contentType,
-  //         "Content-Type": contentType,
-  //       },
-  //       body: JSON.stringify(form),
-  //     });
-
-  //     // Throw error with status code in case Fetch API req failed
-  //     if (!res.ok) {
-  //       throw new Error(res.status.toString());
-  //     }
-
-  //     const { data } = await res.json();
-
-  //     mutate(`/api/users/${id}`, data, false); // Update the local data without a revalidation
-  //     router.push("/");
-  //   } catch (error) {
-  //     setMessage("Failed to update User");
-  //   }
-  // };
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form: FormData) => {
     try {
-      const res = await fetch("/api/users", {
+      const response = await fetch("/api/users", {
         method: "POST",
         headers: {
           Accept: contentType,
@@ -79,14 +49,18 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
       });
 
       // Throw error with status code in case Fetch API req failed
-      if (!res.ok) {
-        throw new Error(res.status.toString());
-      }
+      response.status === 409 &&
+      setMessage("User with this email already exists");
 
-      // router.push("/");
     } catch (error) {
+    
       setMessage("Failed to add User");
     }
+
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
+
   };
 
   const handleChange = (
@@ -94,8 +68,6 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
   ) => {
     const target = e.target;
     const { value, id } = target;
-    // const value = target.value;
-    // const id = target.id;
 
     setForm({
       ...form,
@@ -125,7 +97,11 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
 
   return (
     <>
-      <form id={formId} onSubmit={handleSubmit} className={styles.form}>
+      <form 
+        id={formId} 
+        onSubmit={handleSubmit} 
+        className={styles.form}
+        >
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -155,14 +131,6 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
           onChange={handleChange}
           required
         />
-
-        <label htmlFor="avatar_url">avatar</label>
-        <input
-          type="url"
-          id="avatar_url"
-          value={form.avatar_url}
-          onChange={handleChange}
-        />
        
         <button type="submit" className="btn">
           Submit
@@ -180,3 +148,31 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
 };
 
 export default Form;
+
+  /* The PUT method edits an existing entry in the mongodb database. */
+  // const putData = async (form: FormData) => {
+  //   const { id } = router.query;
+
+  //   try {
+  //     const res = await fetch(`/api/users/${id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         Accept: contentType,
+  //         "Content-Type": contentType,
+  //       },
+  //       body: JSON.stringify(form),
+  //     });
+
+  //     // Throw error with status code in case Fetch API req failed
+  //     if (!res.ok) {
+  //       throw new Error(res.status.toString());
+  //     }
+
+  //     const { data } = await res.json();
+
+  //     mutate(`/api/users/${id}`, data, false); // Update the local data without a revalidation
+  //     router.push("/");
+  //   } catch (error) {
+  //     setMessage("Failed to update User");
+  //   }
+  // };

@@ -19,7 +19,12 @@ export async function POST(req: NextRequest) {
   try {
     await connectToDb();
     const data = await req.json(); // Extract JSON body from the request
-    console.log('Received POST request with body:', data);
+    // console.log('Received POST request with body:', data);
+    //check if user with this email already exists
+    const existingUser = await User.findOne({ email: data.email });
+    if (existingUser) {
+      return NextResponse.json({ success: false, message: 'User with this email already exists' }, { status: 409 });
+    }
     const user = await User.create(data); // create a new model in the database
     console.log('User created:', user);
     return NextResponse.json({ success: true, data: user }, { status: 201 });
