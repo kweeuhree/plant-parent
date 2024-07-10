@@ -22,7 +22,7 @@ const PlantSchema = new mongoose.Schema<Plants>({
     /* The species of your plant */
 
     type: String,
-    required: [true, "Please specify the species of your pet."],
+    required: [true, "Please specify the species of your plant."],
     maxlength: [40, "Species specified cannot be more than 40 characters"],
   },  
   family_tree: {

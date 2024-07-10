@@ -3,6 +3,7 @@ import { connectToDb } from './connectToDb';
 
 export async function GET(req: NextRequest) {
   try {
+    console.log('attempting get request');
     await connectToDb();
     return NextResponse.json({ message: 'GET request handled successfully' });
   } catch (error) {
