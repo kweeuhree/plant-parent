@@ -29,8 +29,11 @@ export default function Home() {
   // const router = useRouter();
   // const { userId } = router.query;
 
-  const handleSettingUserState = () => {
-    setUserState();
+  const handleSettingUserState = (newState: any) => {
+    setUserState((prevUserState) => ({
+      ...prevUserState,
+      ...newState
+    }));
   }
 
   return (
