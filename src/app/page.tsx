@@ -1,5 +1,6 @@
-// "use client";
+"use client";
 
+import { useState } from 'react';
 import Image from "next/image";
 import styles from "./page.module.css";
 // for seamless transition between pages, instead of anchor use Link to navigate   
@@ -8,16 +9,29 @@ import Link from 'next/link';
 import Form from "./(components)/Form/Form";
 import { PiPlantDuotone } from "react-icons/pi";
 
+interface UserState {
+  userId: string | null;
+  loggedIn: boolean;
+}
+
 const userForm = {
   name: "",
   email: "",
   password: "",
-  avatar_url: ""
+  avatar_url: "",
 }
 
 export default function Home() {
+  const [ userState, setUserState ] = useState<UserState>({
+      userId: null,
+      loggedIn: false
+  })
   // const router = useRouter();
   // const { userId } = router.query;
+
+  const handleSettingUserState = () => {
+    setUserState();
+  }
 
   return (
     <main className={styles.main}>
@@ -32,7 +46,7 @@ export default function Home() {
       </div>
 
       <div className={styles.center}>
-        <Form formId="user-form" userForm={userForm} forNewUser={true} />
+        <Form formId="user-form" userForm={userForm} forNewUser={true} setState={handleSettingUserState} />
       </div>
 
     </main>

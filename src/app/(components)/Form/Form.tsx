@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { mutate } from "swr";
 //import styles
 import styles from './FormStyle.module.css';
@@ -9,8 +9,7 @@ import styles from './FormStyle.module.css';
 interface FormData {
     name: string;
     email: string;
-    password: string
-    // avatar_url: string;
+    password: string 
 }
 
 interface Error {
@@ -23,9 +22,11 @@ type Props = {
   formId: string;
   userForm: FormData;
   forNewUser?: boolean;
+  setState: (newState: any) => void;
 };
 
-const Form = ({ formId, userForm, forNewUser = true }: Props) => {
+const Form = ({ formId, userForm, setState, forNewUser = true }: Props) => {
+  
   const contentType = "application/json";
   const [errors, setErrors] = useState<Error>({});
   const [message, setMessage] = useState("");
@@ -35,6 +36,7 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
     email: userForm.email,
     password: userForm.password
   });
+  const router = useRouter();
 
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async (form: FormData) => {
@@ -53,14 +55,23 @@ const Form = ({ formId, userForm, forNewUser = true }: Props) => {
       response.status === 409 &&
       setMessage("User with this email already exists");
 
+      if(response.ok) {
+        const userData = await response.json();
+        setState({id: userData.id, loggedIn: true});
+        //redirect to 'profile/allplants'
+        router.push(`/profile/${userData.id}/all`);
+      }
+
     } catch (error) {
-    
       setMessage("Failed to add User");
+
+    } finally {
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
     }
 
-    setTimeout(() => {
-      setMessage("");
-    }, 3000);
+   
 
   };
 
