@@ -1,10 +1,12 @@
 import React from 'react'
 
-type UserId = {
-  id: number;
+type ProfilePageProps = {
+  params: {
+    id: string;
+  };
 }
 
-const ProfilePage = ({id} : UserId) => {
+const ProfilePage = ({params} : ProfilePageProps) => {
   return (
     <div>ProfilePage</div>
   )
