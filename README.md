@@ -1,12 +1,1 @@
-<hr>
-<h1 align="center">- In Development -</h1>
-<hr>
-
-Plant Parent application.
-<ul>Main goals:</ul>
-<li>Use Next.js</li>
-<li>Store all plants</li>
-<li>Store repotting information</li>
-<li>Create plant family tree</li>
-<li>Cache stored information</li>
-<li>Potentially add data fetching to get additional data</li>
+This is the original repository of a Plant Parent project. I have opted to use React+GO instead, but I leave this here to record a part of thought process.
